@@ -58,7 +58,11 @@
     <!-- Recommend -->
     <div class="movies">
       <div id="movie-grid" class="movies-grid">
-        <div v-for="(moviem, index) in recomMovies" :key="index" class="movie">
+        <div
+          v-for="(moviem, index) in recomMovies.slice(0, 4)"
+          :key="index"
+          class="movie"
+        >
           <div class="movie-img">
             <img
               :src="`https://image.tmdb.org/t/p/w500/${moviem.poster_path}`"
@@ -136,6 +140,8 @@ export default {
       const data = axios.get(`
       https://api.themoviedb.org/3/movie/${this.$route.params.movieid}/recommendations?api_key=ad3c81ae840db058ad6cbfb16df65c81&language=en-US&page=1`)
       const result = await data
+
+      console.log(result.data)
       result.data.results.forEach((movie) => {
         this.recomMovies.push(movie)
       })
