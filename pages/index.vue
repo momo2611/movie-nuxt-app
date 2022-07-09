@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <Header />
     <Hero />
 
     <!-- Search -->
@@ -100,9 +101,10 @@
 import axios from 'axios'
 import Hero from '../components/Hero.vue'
 import Loading from '../components/Loading.vue'
+import Header from '../components/Header.vue'
 export default {
   name: 'IndexPage',
-  components: { Hero, Loading },
+  components: { Hero, Loading, Header },
   head() {
     return {
       title: 'Movies Vue App - Latest Streaming',
