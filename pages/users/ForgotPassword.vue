@@ -1,39 +1,30 @@
 <template>
-  <div class="form-wrap">
-    <form class="login">
-      <p class="login-register">
-        Don't have an account?
-        <NuxtLink class="router-link" :to="{ name: 'users-Register' }"
-          >Register</NuxtLink
-        >
-      </p>
-      <h2>Login to MomoCmax</h2>
-      <div class="inputs">
-        <div class="input">
-          <input type="text" placeholder="Email" v-model="email" />
-          <img
-            src="../../assets/Icons/envelope-regular.svg"
-            alt=""
-            class="icon"
-          />
+  <div class="reset-password">
+    <div class="form-wrap">
+      <form class="reset">
+        <p class="login-register">
+          Back to
+          <NuxtLink class="router-link" :to="{ name: 'users-Login' }"
+            >Login</NuxtLink
+          >
+        </p>
+        <h2>Reset Password</h2>
+        <p>Forgot your password? Enter your email to reset it</p>
+        <div class="inputs">
+          <div class="input">
+            <input type="text" placeholder="Email" v-model="email" />
+            <img
+              src="../../assets/Icons/envelope-regular.svg"
+              alt=""
+              class="icon"
+            />
+          </div>
         </div>
-        <div class="input">
-          <input type="password" placeholder="Password" v-model="password" />
-          <img
-            src="../../assets/Icons/lock-alt-solid.svg"
-            alt=""
-            class="icon"
-          />
-        </div>
-        <div v-show="error" class="error">{{ this.errorMsg }}</div>
-      </div>
-      <NuxtLink class="forgot-password" :to="{ name: 'users-ForgotPassword' }"
-        >Forgot Your Password?</NuxtLink
-      >
-      <button @click.prevent="signIn">Sign In</button>
-      <div class="angle"></div>
-    </form>
-    <div class="background"></div>
+        <button @click.prevent="resetPassword">Reset</button>
+        <div class="angle"></div>
+      </form>
+      <div class="background"></div>
+    </div>
   </div>
 </template>
 
@@ -42,8 +33,22 @@ export default {}
 </script>
 
 <style lang="scss" scoped>
-.login {
+.reset-password {
+  position: relative;
   background-color: #2c3639;
+
+  .form-wrap {
+    .reset {
+      h2 {
+        margin-bottom: 8px;
+      }
+      p {
+        text-align: center;
+        margin-bottom: 32px;
+        color: #dcd7c9;
+      }
+    }
+  }
 }
 button {
   transition: 500ms ease all;

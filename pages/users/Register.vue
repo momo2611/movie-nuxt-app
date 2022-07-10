@@ -73,10 +73,10 @@ button {
   transition: 500ms ease all;
   cursor: pointer;
   margin-top: 24px;
-  padding: 12px 24px;
+  padding: 16px 32px;
   background-color: #3f4e4f;
   color: #fff;
-  border-radius: 20px;
+  border-radius: 24px;
   border: none;
   text-transform: uppercase;
   &:focus {
@@ -105,6 +105,7 @@ button {
   .login-register {
     margin-bottom: 32px;
     color: #dcd7c9;
+    font-size: 20px;
 
     .router-link {
       color: #dcd7c9;
@@ -130,24 +131,24 @@ button {
       color: #dcd7c9;
       margin-bottom: 40px;
       @media (min-width: 900px) {
-        font-size: 40px;
+        font-size: 52px;
       }
     }
     .inputs {
       width: 100%;
-      max-width: 350px;
+      max-width: 362px;
       .input {
         position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-bottom: 8px;
+        margin-bottom: 12px;
         input {
           width: 100%;
           border: none;
           background-color: #f2f7f6;
           padding: 4px 4px 4px 30px;
-          height: 50px;
+          height: 54px;
           border-radius: 8px;
           &:focus {
             outline: none;
