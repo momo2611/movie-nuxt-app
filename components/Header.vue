@@ -1,7 +1,7 @@
 <template>
   <div class="nav" id="nav">
     <img src="../assets/imgs/logoipsum-logo-40.svg" alt="" class="nav__logo" />
-    <NuxtLink class="button button-light" :to="{ name: 'users-Users' }"
+    <NuxtLink class="button button-light" :to="{ name: 'users-Login' }"
       >Login</NuxtLink
     >
   </div>
