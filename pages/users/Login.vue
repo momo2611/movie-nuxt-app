@@ -10,7 +10,7 @@
       <h2>Login to MomoCmax</h2>
       <div class="inputs">
         <div class="input">
-          <input type="text" placeholder="Email" v-model="email" />
+          <input type="text" placeholder="Email" v-model="auth.email" />
           <img
             src="../../assets/Icons/envelope-regular.svg"
             alt=""
@@ -18,7 +18,11 @@
           />
         </div>
         <div class="input">
-          <input type="password" placeholder="Password" v-model="password" />
+          <input
+            type="password"
+            placeholder="Password"
+            v-model="auth.password"
+          />
           <img
             src="../../assets/Icons/lock-alt-solid.svg"
             alt=""
@@ -38,7 +42,35 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      error: false,
+      errorMsg: '',
+      auth: {
+        email: '',
+        password: '',
+      },
+    }
+  },
+  methods: {
+    signIn() {
+      const that = this
+      this.$fire.auth
+        .signInWithEmailAndPassword(this.auth.email, this.auth.password)
+
+        .then((user) => {
+          that.$router.push({ name: 'index' })
+          that.error = false
+          that.errorMsg = ''
+        })
+        .catch(function (err) {
+          that.error = true
+          that.errorMsg = err.message
+        })
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>

@@ -31,8 +31,33 @@ export default {
     '@nuxtjs/eslint-module',
   ],
 
+
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: [
+    [
+      '@nuxtjs/firebase',
+      {
+        config: {
+          apiKey: "AIzaSyBSItg2qZaeelBq9KW16TaUNG_kdixk_-w",
+          authDomain: "fir-nuxt-auth-fffb6.firebaseapp.com",
+          projectId: "fir-nuxt-auth-fffb6",
+          storageBucket: "fir-nuxt-auth-fffb6.appspot.com",
+          messagingSenderId: "551785545145",
+          appId: "1:551785545145:web:41dae597037f8c76628a68"
+        },
+        services: {
+          auth: {
+            persistence: 'local', // default
+            initialize: {
+              onAuthStateChangedAction: 'onAuthStateChangedAction',
+              subscribeManually: false
+            },
+            ssr: false, // default
+          }
+        }
+      }
+    ]
+  ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},

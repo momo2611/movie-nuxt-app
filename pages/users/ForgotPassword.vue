@@ -1,18 +1,23 @@
 <template>
   <div class="reset-password">
+    <Modal
+      v-if="modalActive"
+      :modalMessage="modalMessage"
+      @close-modal="closeModal"
+    />
     <div class="form-wrap">
       <form class="reset">
         <p class="login-register">
           Back to
           <NuxtLink class="router-link" :to="{ name: 'users-Login' }"
-            >Login</NuxtLink
+            >Log in</NuxtLink
           >
         </p>
         <h2>Reset Password</h2>
         <p>Forgot your password? Enter your email to reset it</p>
         <div class="inputs">
           <div class="input">
-            <input type="text" placeholder="Email" v-model="email" />
+            <input type="text" placeholder="Email" v-model="auth.email" />
             <img
               src="../../assets/Icons/envelope-regular.svg"
               alt=""
@@ -20,7 +25,7 @@
             />
           </div>
         </div>
-        <button @click.prevent="resetPassword">Reset</button>
+        <button @click.prevent="forgotPassword">Reset</button>
         <div class="angle"></div>
       </form>
       <div class="background"></div>
@@ -29,7 +34,38 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      modalActive: false,
+      modalMessage: '',
+      auth: {
+        email: '',
+      },
+    }
+  },
+  methods: {
+    forgotPassword() {
+      const that = this
+      this.$fire.auth
+        .sendPasswordResetEmail(this.auth.email)
+        .then(() => {
+          that.modalActive = true
+          that.modalMessage =
+            'If your account exists, you will receive a email to ' +
+            that.auth.email
+        })
+        .catch(() => {
+          that.modalActive = true
+          that.modalMessage = 'User not found or the user may have been deleted'
+        })
+    },
+    closeModal() {
+      this.modalActive = !this.modalActive
+      this.auth.email = ''
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,9 +1,23 @@
 <template>
   <div class="nav" id="nav">
     <img src="../assets/imgs/logoipsum-logo-40.svg" alt="" class="nav__logo" />
-    <NuxtLink class="button button-light" :to="{ name: 'users-Login' }"
-      >Login</NuxtLink
+    <NuxtLink
+      v-if="!user"
+      class="button button-light"
+      :to="{ name: 'users-Login' }"
+      >Log in</NuxtLink
     >
+    <div
+      v-else
+      class="button button-light"
+      @click="asyncData"
+      :to="{ name: 'users-Login' }"
+    >
+      Log out
+    </div>
+    <div v-if="user" class="button button-light username">
+      {{ this.$fire.auth.currentUser.email }}
+    </div>
   </div>
 </template>
 
@@ -16,12 +30,20 @@ export default {
         document.getElementById('nav').classList.add('nav__black')
       else document.getElementById('nav').classList.remove('nav__black')
     },
+    asyncData() {
+      this.$fire.auth.signOut()
+    },
   },
   beforeMount() {
     window.addEventListener('scroll', this.handleScroll)
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.handleScroll)
+  },
+  computed: {
+    user() {
+      return this.$store.state.user
+    },
   },
 }
 </script>
