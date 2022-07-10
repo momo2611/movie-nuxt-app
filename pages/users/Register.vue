@@ -1,290 +1,188 @@
 <template>
-  <section class="container-user forms">
-    <div class="form login">
-      <div class="form-content">
-        <header>Login</header>
-        <form action="#">
-          <div class="field input-field">
-            <input type="email" placeholder="Email" class="input" />
-          </div>
-
-          <div class="field input-field">
-            <input type="password" placeholder="Password" class="password" />
-            <i class="bx bx-hide eye-icon"></i>
-          </div>
-
-          <div class="form-link">
-            <a href="#" class="forgot-pass">Forgot password?</a>
-          </div>
-
-          <div class="field button-field">
-            <button>Login</button>
-          </div>
-        </form>
-
-        <div class="form-link">
-          <span
-            >Don't have an account?
-            <a href="#" @click="ToggleSignUp" class="link signup-link"
-              >Signup</a
-            ></span
-          >
+  <div class="form-wrap">
+    <form class="register">
+      <p class="login-register">
+        Already have an account?
+        <NuxtLink class="router-link" :to="{ name: 'users-Login' }"
+          >Login</NuxtLink
+        >
+      </p>
+      <h2>Create Your Account</h2>
+      <div class="inputs">
+        <div class="input">
+          <input type="text" placeholder="First Name" v-model="firstName" />
+          <img
+            src="../../assets/Icons/user-alt-light.svg"
+            alt=""
+            class="icon"
+          />
         </div>
-      </div>
-
-      <div class="line"></div>
-
-      <div class="media-options">
-        <a href="#" class="field facebook">
-          <img src="../../assets/imgs/facebook.PNG" alt="" class="google-img" />
-          <span>Login with Facebook</span>
-        </a>
-      </div>
-
-      <div class="media-options">
-        <a href="#" class="field google">
-          <img src="../../assets/imgs/google.PNG" alt="" class="google-img" />
-          <span>Login with Google</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Signup Form -->
-
-    <div class="form signup">
-      <div class="form-content">
-        <header>Signup</header>
-        <form action="#">
-          <div class="field input-field">
-            <input type="email" placeholder="Email" class="input" />
-          </div>
-
-          <div class="field input-field">
-            <input
-              type="password"
-              placeholder="Create password"
-              class="password"
-            />
-          </div>
-
-          <div class="field input-field">
-            <input
-              type="password"
-              placeholder="Confirm password"
-              class="password"
-            />
-            <i class="bx bx-hide eye-icon"></i>
-          </div>
-
-          <div class="field button-field">
-            <button>Signup</button>
-          </div>
-        </form>
-
-        <div class="form-link">
-          <span
-            >Already have an account?
-            <a href="#" @click="ToggleSignUp" class="link login-link"
-              >Login</a
-            ></span
-          >
+        <div class="input">
+          <input type="text" placeholder="Last Name" v-model="lastName" />
+          <img
+            src="../../assets/Icons/user-alt-light.svg"
+            alt=""
+            class="icon"
+          />
         </div>
+        <div class="input">
+          <input type="text" placeholder="Username" v-model="username" />
+          <img
+            src="../../assets/Icons/user-alt-light.svg"
+            alt=""
+            class="icon"
+          />
+        </div>
+        <div class="input">
+          <input type="text" placeholder="Email" v-model="email" />
+          <img
+            src="../../assets/Icons/envelope-regular.svg"
+            alt=""
+            class="icon"
+          />
+        </div>
+        <div class="input">
+          <input type="password" placeholder="Password" v-model="password" />
+          <img
+            src="../../assets/Icons/lock-alt-solid.svg"
+            alt=""
+            class="icon"
+          />
+        </div>
+        <div v-show="error" class="error"></div>
       </div>
-
-      <div class="line"></div>
-
-      <div class="media-options">
-        <a href="#" class="field facebook">
-          <img src="../../assets/imgs/facebook.PNG" alt="" class="google-img" />
-          <span>Login with Facebook</span>
-        </a>
-      </div>
-
-      <div class="media-options">
-        <a href="#" class="field google">
-          <img src="../../assets/imgs/google.PNG" alt="" class="google-img" />
-          <span>Login with Google</span>
-        </a>
-      </div>
-    </div>
-  </section>
+      <button @click.prevent="register">Sign Up</button>
+      <div class="angle"></div>
+    </form>
+    <div class="background"></div>
+  </div>
 </template>
 
 <script>
-export default {
-  methods: {
-    ToggleSignUp() {
-      document.querySelectorAll('.link').forEach((link) => {
-        link.addEventListener('click', (e) => {
-          e.preventDefault()
-          document.querySelector('.forms').classList.toggle('show-signup')
-        })
-      })
-    },
-  },
-}
+export default {}
 </script>
 
 <style lang="scss" scoped>
-.container-user {
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #4070f4;
-  column-gap: 30px;
+.register {
+  background-color: #2c3639;
+  h2 {
+    max-width: 350px;
+  }
 }
-.form {
-  position: absolute;
-  max-width: 430px;
-  width: 100%;
-  padding: 30px;
-  border-radius: 6px;
-  background: #fff;
-}
-.form.signup {
-  opacity: 0;
-  pointer-events: none;
-}
-.forms.show-signup .form.signup {
-  opacity: 1;
-  pointer-events: auto;
-}
-.forms.show-signup .form.login {
-  opacity: 0;
-  pointer-events: none;
-}
-header {
-  font-size: 28px;
-  font-weight: 600;
-  color: #232836;
-  text-align: center;
-}
-form {
-  margin-top: 30px;
-}
-.form .field {
-  position: relative;
-  height: 50px;
-  width: 100%;
-  margin-top: 20px;
-  border-radius: 6px;
-}
-.field input,
-.field button {
-  height: 100%;
-  width: 100%;
+button {
+  transition: 500ms ease all;
+  cursor: pointer;
+  margin-top: 24px;
+  padding: 12px 24px;
+  background-color: #3f4e4f;
+  color: #fff;
+  border-radius: 20px;
   border: none;
-  font-size: 16px;
-  font-weight: 400;
-  border-radius: 6px;
+  text-transform: uppercase;
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    background-color: rgba(162, 123, 92, 0.7);
+  }
 }
-.field input {
-  outline: none;
-  padding: 0 15px;
-  border: 1px solid#CACACA;
-}
-.field input:focus {
-  border-bottom-width: 2px;
-}
-.eye-icon {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  font-size: 18px;
-  color: #8b8b8b;
-  cursor: pointer;
-  padding: 5px;
-}
-.field button {
-  color: #fff;
-  background-color: #0171d3;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-.field button:hover {
-  background-color: #016dcb;
-}
-.form-link {
+.error {
   text-align: center;
-  margin-top: 10px;
+  font-size: 12px;
+  color: red;
 }
-.form-link span,
-.form-link a {
-  font-size: 14px;
-  font-weight: 400;
-  color: #232836;
-}
-.form a {
-  color: #0171d3;
-  text-decoration: none;
-}
-.form-content a:hover {
-  text-decoration: underline;
-}
-.line {
-  position: relative;
-  height: 1px;
-  width: 100%;
-  margin: 36px 0;
-  background-color: #d4d4d4;
-}
-.line::before {
-  content: 'Or';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  color: #8b8b8b;
-  padding: 0 15px;
-}
-.media-options a {
+.form-wrap {
+  overflow: hidden;
   display: flex;
-  align-items: center;
+  height: 100vh;
   justify-content: center;
-}
-a.facebook {
-  color: #fff;
-  background-color: #4267b2;
-}
-a.facebook .facebook-icon {
-  height: 28px;
-  width: 28px;
-  color: #0171d3;
-  font-size: 20px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #fff;
-}
-.facebook-icon,
-img.google-img {
-  position: absolute;
-  top: 50%;
-  left: 15px;
-  transform: translateY(-50%);
-}
-img.google-img {
-  height: 20px;
-  width: 20px;
-  object-fit: cover;
-}
-a.google {
-  border: 1px solid #cacaca;
-}
-a.google span {
-  font-weight: 500;
-  opacity: 0.6;
-  color: #232836;
-}
+  align-self: center;
+  margin: 0 auto;
+  width: 90%;
+  @media (min-width: 900px) {
+    width: 100%;
+  }
+  .login-register {
+    margin-bottom: 32px;
+    color: #dcd7c9;
 
-@media screen and (max-width: 400px) {
-  .form {
-    padding: 20px 10px;
+    .router-link {
+      color: #dcd7c9;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  form {
+    padding: 0 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    @media (min-width: 900px) {
+      padding: 0 50px;
+    }
+    h2 {
+      text-align: center;
+      font-size: 32px;
+      color: #dcd7c9;
+      margin-bottom: 40px;
+      @media (min-width: 900px) {
+        font-size: 40px;
+      }
+    }
+    .inputs {
+      width: 100%;
+      max-width: 350px;
+      .input {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 8px;
+        input {
+          width: 100%;
+          border: none;
+          background-color: #f2f7f6;
+          padding: 4px 4px 4px 30px;
+          height: 50px;
+          border-radius: 8px;
+          &:focus {
+            outline: none;
+          }
+        }
+        .icon {
+          width: 12px;
+          position: absolute;
+          left: 6px;
+        }
+      }
+    }
+    .angle {
+      display: none;
+      position: absolute;
+      background-color: #2c3639;
+      transform: rotateZ(3deg);
+      width: 60px;
+      right: -30px;
+      height: 101%;
+      @media (min-width: 900px) {
+        display: initial;
+      }
+    }
+  }
+  .background {
+    display: none;
+    flex: 2;
+    background-size: cover;
+    background-image: url('../../assets/imgs/bh-log.webp');
+    width: 100%;
+    height: 100%;
+    @media (min-width: 900px) {
+      display: initial;
+    }
   }
 }
 </style>
