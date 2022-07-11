@@ -35,6 +35,10 @@
         >Forgot Your Password?</NuxtLink
       >
       <button @click.prevent="signIn">Sign In</button>
+      <button @click.prevent="GoogleIn" class="btn-log">
+        <img src="../../assets/imgs/google.PNG" alt="" class="icon" />
+        <span>Log in with Google</span>
+      </button>
       <div class="angle"></div>
     </form>
     <div class="background"></div>
@@ -69,23 +73,53 @@ export default {
           that.errorMsg = err.message
         })
     },
+    GoogleIn() {
+      const that = this
+      this.provider = new this.$fireModule.auth.GoogleAuthProvider()
+      this.$fire.auth
+        .signInWithPopup(this.provider)
+
+        .then((user) => {
+          that.$router.push({ name: 'index' })
+          that.error = false
+          that.errorMsg = ''
+        })
+        .catch(function (err) {
+          that.error = true
+          that.errorMsg = err.message
+        })
+    },
   },
 }
 </script>
 
 <style lang="scss" scoped>
+.btn-log {
+  border-radius: 8px;
+  margin-top: 32px;
+  padding: 12px 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  .icon {
+    width: 18px;
+    margin-right: 12px;
+  }
+}
 .login {
   background-color: #2c3639;
 }
 button {
   transition: 500ms ease all;
   cursor: pointer;
-  margin-top: 24px;
-  padding: 16px 32px;
+  padding: 12px 28px;
   background-color: #3f4e4f;
   color: #fff;
   border-radius: 24px;
   border: none;
+  font-size: 16px;
   text-transform: uppercase;
   &:focus {
     outline: none;
@@ -173,8 +207,8 @@ button {
       text-decoration: none;
       color: #dcd7c9;
       cursor: pointer;
-      font-size: 18px;
-      margin: 16px 0 32px;
+      font-size: 14px;
+      margin: 12px 0 20px;
       border-bottom: 1px solid transparent;
       transition: 0.5s ease all;
       &:hover {

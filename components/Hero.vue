@@ -124,6 +124,12 @@ export default {
     .button {
       font-size: 20px;
       align-self: flex-start;
+      background-color: transparent;
+      border: 1px solid #c92502;
+      &:hover {
+        background-color: rgba(137, 27, 2, 0.8);
+        border-color: transparent;
+      }
     }
   }
 }
