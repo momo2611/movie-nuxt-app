@@ -10,30 +10,6 @@
       <h2>Create Your Account</h2>
       <div class="inputs">
         <div class="input">
-          <input type="text" placeholder="First Name" v-model="firstName" />
-          <img
-            src="../../assets/Icons/user-alt-light.svg"
-            alt=""
-            class="icon"
-          />
-        </div>
-        <div class="input">
-          <input type="text" placeholder="Last Name" v-model="lastName" />
-          <img
-            src="../../assets/Icons/user-alt-light.svg"
-            alt=""
-            class="icon"
-          />
-        </div>
-        <div class="input">
-          <input type="text" placeholder="Username" v-model="username" />
-          <img
-            src="../../assets/Icons/user-alt-light.svg"
-            alt=""
-            class="icon"
-          />
-        </div>
-        <div class="input">
           <input type="text" placeholder="Email" v-model="email" />
           <img
             src="../../assets/Icons/envelope-regular.svg"
@@ -49,9 +25,21 @@
             class="icon"
           />
         </div>
-        <div v-show="error" class="error"></div>
+        <div class="input">
+          <input
+            type="password"
+            placeholder="Confirm your password"
+            v-model="repassword"
+          />
+          <img
+            src="../../assets/Icons/lock-alt-solid.svg"
+            alt=""
+            class="icon"
+          />
+        </div>
+        <div v-show="error" class="error">{{ this.errorMsg }}</div>
       </div>
-      <button @click.prevent="register">Sign Up</button>
+      <button @click.prevent="RegisterAccount">Sign Up</button>
       <div class="angle"></div>
     </form>
     <div class="background"></div>
@@ -59,7 +47,38 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+      repassword: '',
+      error: false,
+      errorMsg: '',
+    }
+  },
+  methods: {
+    RegisterAccount() {
+      const that = this
+      if (this.email !== '' && this.password !== '' && this.repassword !== '') {
+        if (this.password === this.repassword) {
+          // call
+          this.$fire.auth
+            .createUserWithEmailAndPassword(this.email, this.password)
+            .then((user) => {
+              that.$router.push({ name: 'index' })
+            })
+        } else {
+          this.error = true
+          this.errorMsg = 'Incorrect confirm password!'
+        }
+      } else {
+        this.error = true
+        this.errorMsg = 'Please fill out all the fields!'
+      }
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>
