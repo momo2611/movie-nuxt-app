@@ -15,9 +15,13 @@
     >
       Log out
     </div>
-    <div v-if="user" class="button button-light username">
+    <NuxtLink
+      :to="{ name: 'profile-Profile' }"
+      v-if="user"
+      class="button button-light username"
+    >
       {{ this.$fire.auth.currentUser.email }}
-    </div>
+    </NuxtLink>
   </div>
 </template>
 
